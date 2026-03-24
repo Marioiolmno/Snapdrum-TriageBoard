@@ -95,9 +95,14 @@ body.light .toggle::after{transform:translateX(14px)}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:5px}
 .card-title{font-size:13px;font-weight:500;line-height:1.35;color:var(--text)}
 .badge{font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;white-space:nowrap;flex-shrink:0}
+.b-critical{background:#2a0a0a;color:#ff2020}
+body.light .b-critical{background:#fff0f0;color:#cc0000}
 .b-urgent{background:var(--red-dim);color:var(--red)}
 .b-thisweek{background:var(--amber-dim);color:var(--amber)}
 .b-planning{background:var(--surface3);color:var(--text2)}
+.b-low{background:#0a1a2a;color:#4db8ff}
+body.light .b-low{background:#e8f4ff;color:#0070cc}
+.b-custom{background:var(--surface3);color:var(--text2)}
 .deadline{font-size:10px;color:var(--red);font-weight:500;margin-bottom:5px;display:flex;align-items:center;gap:4px}
 .dl-dot{width:4px;height:4px;border-radius:50%;background:var(--red);flex-shrink:0}
 .tasks{display:flex;flex-direction:column;gap:3px;margin-bottom:5px}
@@ -185,6 +190,69 @@ body.light .lt-done{background:#edfaf3;color:#2d8c5a}
 .wa-out{width:100%;background:var(--input);border:1px solid var(--border);border-radius:6px;padding:10px;color:var(--text2);font-size:11px;font-family:'DM Mono',monospace;min-height:180px;resize:vertical;outline:none;line-height:1.6}
 .copy-btn{font-size:12px;padding:6px 16px;border-radius:6px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-weight:500;font-family:inherit}
 .copy-btn.ok{background:#3ddc84}
+/* TRIAGE VIEW */
+.triage-view{display:none;padding:14px 20px 40px}
+.triage-view.show{display:block}
+.triage-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:10px 14px;background:var(--surface2);border-radius:8px;border:1px solid var(--border)}
+.triage-header-text h2{font-size:13px;font-weight:600;color:var(--text);margin:0}
+.triage-header-text p{font-size:11px;color:var(--text3);margin:0;margin-top:2px}
+.triage-lane-indicator{width:3px;border-radius:2px;height:14px;flex-shrink:0}
+.triage-lanes{display:flex;flex-direction:column;gap:10px}
+.triage-lane{border-radius:10px;border:1px solid var(--border);overflow:hidden}
+.triage-lane-head{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none;transition:background .15s}
+.triage-lane-head:hover{filter:brightness(1.08)}
+.triage-lane-title{font-size:12px;font-weight:600;letter-spacing:.04em;flex:1}
+.triage-lane-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;font-family:'DM Mono',monospace}
+.triage-lane-chevron{font-size:10px;color:var(--text3);transition:transform .2s;flex-shrink:0}
+.triage-lane.collapsed .triage-lane-chevron{transform:rotate(-90deg)}
+.triage-lane-body{padding:10px;display:flex;flex-direction:column;gap:6px;background:var(--surface)}
+.triage-lane.collapsed .triage-lane-body{display:none}
+.triage-row{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--card);border:1px solid var(--border);border-radius:7px;cursor:pointer;transition:border-color .15s,opacity .2s,box-shadow .15s;position:relative}
+.triage-row:hover{border-color:var(--border2)}
+.triage-row.overdue{border-left:3px solid var(--red)}
+.triage-row.tr-dragging{opacity:.3;cursor:grabbing}
+.triage-row.tr-drag-over-top::before{content:'';position:absolute;top:-3px;left:8px;right:8px;height:2px;background:var(--accent);border-radius:2px;pointer-events:none}
+.triage-row.tr-drag-over-bottom::after{content:'';position:absolute;bottom:-3px;left:8px;right:8px;height:2px;background:var(--accent);border-radius:2px;pointer-events:none}
+.triage-drag-handle{display:flex;flex-direction:column;gap:2px;padding:2px 4px;cursor:grab;flex-shrink:0;opacity:0;transition:opacity .15s}
+.triage-row:hover .triage-drag-handle{opacity:.5}
+.triage-drag-handle:hover{opacity:1!important}
+.triage-drag-handle span{display:block;width:12px;height:1.5px;background:var(--text3);border-radius:1px}
+.triage-lane-body.tr-lane-over{outline:2px solid var(--accent);outline-offset:-2px;border-radius:0 0 8px 8px}
+.triage-row-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.triage-row-status{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.triage-row-status.todo{background:var(--text3)}
+.triage-row-status.inprogress{background:var(--accent)}
+.triage-row-status.blocked{background:var(--red)}
+.triage-row-status.done{background:#3ddc84}
+.triage-row-title{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.triage-row-section{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;flex-shrink:0}
+.triage-row-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.triage-row-dl{font-size:10px;color:var(--red);font-family:'DM Mono',monospace;font-weight:500;white-space:nowrap}
+.triage-row-dl.ok{color:var(--text3)}
+.triage-row-avs{display:flex;gap:2px}
+.triage-row-av{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:600;color:#fff;border:1.5px solid var(--card)}
+.triage-row-noowner{font-size:10px;color:var(--amber);font-weight:500}
+.triage-row-tasks{font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;white-space:nowrap}
+.triage-row-status-lbl{font-size:10px;padding:1px 6px;border-radius:3px;white-space:nowrap}
+.triage-row-status-lbl.todo{background:var(--surface3);color:var(--text2)}
+.triage-row-status-lbl.inprogress{background:var(--accent-dim);color:var(--accent)}
+.triage-row-status-lbl.blocked{background:var(--red-dim);color:var(--red)}
+.triage-row-status-lbl.done{background:#0d2318;color:#3ddc84}
+body.light .triage-row-status-lbl.done{background:#edfaf3;color:#2d8c5a}
+.triage-empty{font-size:11px;color:var(--text3);text-align:center;padding:20px;font-style:italic}
+.triage-section-group{margin-bottom:8px}
+.triage-section-group:last-child{margin-bottom:0}
+.triage-section-label{display:flex;align-items:center;gap:6px;padding:4px 6px;margin-bottom:4px}
+.triage-section-label-text{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text3)}
+.triage-section-label-line{flex:1;height:1px;background:var(--border)}
+.triage-section-label-count{font-size:10px;font-family:'DM Mono',monospace;color:var(--text3)}
+/* SECTIONS DROPDOWN */
+.sec-dd-wrap{position:relative;flex-shrink:0}
+.sec-dd-btn{font-size:12px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;white-space:nowrap;transition:all .15s;font-family:inherit}
+.sec-dd-btn:hover{background:var(--surface2);color:var(--text)}
+.sec-dd-btn.active{background:var(--accent-dim);color:var(--accent);border-color:var(--accent)}
+.sec-dd-menu{position:fixed;background:var(--modal);border:1px solid var(--border2);border-radius:10px;padding:6px;min-width:180px;z-index:200;box-shadow:0 8px 24px var(--shadow);max-height:280px;overflow-y:auto}
+.sec-dd-menu.hidden{display:none}
 @media(max-width:900px){.board{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.board{grid-template-columns:1fr;padding:10px}.topbar,.toolbar,.bulk-bar{padding-left:12px;padding-right:12px}}
 </style>
@@ -205,6 +273,7 @@ body.light .lt-done{background:#edfaf3;color:#2d8c5a}
       <div class="manage-menu hidden" id="manage-dd">
         <div class="manage-item" onclick="openPeople();closeAllDD()">People</div>
         <div class="manage-item" onclick="openSections();closeAllDD()">Sections</div>
+        <div class="manage-item" onclick="openPriorities();closeAllDD()">Priorities</div>
         <div class="manage-item" onclick="archiveDone();closeAllDD()">Archive done cards</div>
         <div class="manage-item" onclick="openArchive();closeAllDD()">View archive</div>
         <div class="manage-item" onclick="openWA();closeAllDD()">Export to WhatsApp</div>
@@ -228,11 +297,15 @@ body.light .lt-done{background:#edfaf3;color:#2d8c5a}
 
 <div class="toolbar">
   <div class="row-sections" id="row-sections"></div>
+  <div class="sec-dd-wrap" id="sec-dd-wrap" style="display:none">
+    <button class="sec-dd-btn" id="sec-dd-btn" onclick="toggleDD('sec')">Section: All ▾</button>
+    <div class="drop-menu hidden" id="sec-dd"></div>
+  </div>
   <div class="tdiv"></div>
   <div class="row-status" id="row-status"></div>
   <div class="row-actions">
     <div class="search-wrap"><span class="search-icon">&#9906;</span><input class="search-input" id="search-input" placeholder="Search..." oninput="onSearch()" onkeydown="if(event.key==='Escape'){this.value='';onSearch();}"/></div>
-    <button class="view-btn" id="view-btn" onclick="toggleView()">List view</button>
+    <button class="view-btn" id="view-btn" onclick="cycleView()">List view</button>
     <button class="sort-btn" id="sort-btn" onclick="toggleDD('sort')">Sort</button>
     <div class="drop-wrap"><div class="drop-menu hidden" id="sort-dd"></div></div>
     <button class="tool-btn" id="bulk-btn" onclick="toggleBulk()">Select</button>
@@ -254,6 +327,16 @@ body.light .lt-done{background:#edfaf3;color:#2d8c5a}
 
 <div class="list-view" id="list-view"><table class="list-table" id="list-table"></table></div>
 
+<div class="triage-view" id="triage-view">
+  <div class="triage-header">
+    <div class="triage-header-text">
+      <h2>Triage View</h2>
+      <p>Cards sorted by severity — most critical cases first</p>
+    </div>
+  </div>
+  <div class="triage-lanes" id="triage-lanes"></div>
+</div>
+
 <div class="overlay" id="ov-card" onclick="if(event.target===this)closeOv('ov-card')">
   <div class="modal">
     <div class="modal-title" id="card-title-lbl">Add card</div>
@@ -262,7 +345,7 @@ body.light .lt-done{background:#edfaf3;color:#2d8c5a}
       <div class="form-group"><label class="form-label">Section</label><select class="form-input" id="f-section"></select></div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">Priority</label><select class="form-input" id="f-priority"><option value="urgent">Urgent</option><option value="thisweek">This week</option><option value="planning">Planning</option></select></div>
+      <div class="form-group"><label class="form-label">Priority</label><select class="form-input" id="f-priority"></select></div>
       <div class="form-group"><label class="form-label">Status</label><select class="form-input" id="f-status"><option value="todo">To do</option><option value="inprogress">In progress</option><option value="blocked">Blocked</option><option value="done">Done</option></select></div>
     </div>
     <div class="form-group"><label class="form-label">Deadline</label><input class="form-input" id="f-deadline" type="date"/></div>
@@ -280,6 +363,28 @@ body.light .lt-done{background:#edfaf3;color:#2d8c5a}
 
 <div class="overlay" id="ov-sections" onclick="if(event.target===this)closeOv('ov-sections')">
   <div class="modal"><div class="modal-title">Sections</div><div id="sections-list"></div><div class="inline-add"><input class="form-input" id="new-section" placeholder="Section name" onkeydown="if(event.key==='Enter')addSection()"/><button class="btn-save" onclick="addSection()">Add</button></div><div class="modal-foot"><button class="btn-cancel" onclick="closeOv('ov-sections')">Close</button></div></div>
+</div>
+
+<div class="overlay" id="ov-priorities" onclick="if(event.target===this)closeOv('ov-priorities')">
+  <div class="modal">
+    <div class="modal-title">Priorities</div>
+    <p style="font-size:11px;color:var(--text3);margin-bottom:12px">Drag to reorder. Order determines triage severity (top = most critical).</p>
+    <div id="priorities-list"></div>
+    <div class="inline-add" style="margin-top:10px">
+      <input class="form-input" id="new-priority-name" placeholder="Priority name e.g. High" onkeydown="if(event.key==='Enter')addPriority()"/>
+      <select class="form-input" id="new-priority-color" style="width:auto;flex-shrink:0">
+        <option value="#ff2020">Red</option>
+        <option value="#ff5252">Coral</option>
+        <option value="#f5a623">Amber</option>
+        <option value="#3ddc84">Green</option>
+        <option value="#7c6cfc">Purple</option>
+        <option value="#4db8ff">Blue</option>
+        <option value="#888898">Grey</option>
+      </select>
+      <button class="btn-save" onclick="addPriority()">Add</button>
+    </div>
+    <div class="modal-foot"><button class="btn-cancel" onclick="closeOv('ov-priorities')">Close</button></div>
+  </div>
 </div>
 
 <div class="overlay" id="ov-archive" onclick="if(event.target===this)closeOv('ov-archive')">
@@ -300,7 +405,35 @@ var SK = 'snapdrum-v7';
 var COLS = ['todo','inprogress','blocked','done'];
 var COL_LABELS = {todo:'To do', inprogress:'In progress', blocked:'Blocked', done:'Done'};
 var AV_COLORS = ['#7c6cfc','#e84393','#3ddc84','#f5a623','#4db8ff','#ff5252','#c77dff','#00b4d8'];
-var PRIO_ORDER = {urgent:0, thisweek:1, planning:2};
+
+/* PRIORITIES — ordered most-critical first */
+var DEFAULT_PRIORITIES = [
+  {id:'critical', label:'Critical', color:'#ff2020'},
+  {id:'urgent',   label:'Urgent',   color:'#ff5252'},
+  {id:'thisweek', label:'This week', color:'#f5a623'},
+  {id:'planning', label:'Planning', color:'#888898'},
+  {id:'low',      label:'Low',      color:'#4db8ff'}
+];
+
+function getPrioOrder(){
+  var o={};
+  PRIORITIES.forEach(function(p,i){o[p.id]=i;});
+  return o;
+}
+function getPrio(id){ return PRIORITIES.find(function(p){return p.id===id;})||PRIORITIES[PRIORITIES.length-1]; }
+function bc(pid){ return 'b-prio'; } /* unused — we inject style directly now */
+function bl(pid){ var p=getPrio(pid); return p?p.label:pid; }
+/* dynamic badge style */
+function badgeStyle(pid){
+  var p=getPrio(pid); if(!p) return '';
+  /* derive a dim bg from the color at 15% opacity */
+  var c=p.color;
+  return 'style="color:'+c+';background:'+hexToRgba(c,.15)+'"';
+}
+function hexToRgba(hex,a){
+  var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return 'rgba('+r+','+g+','+b+','+a+')';
+}
 
 var DEFAULT_SECTIONS = ['Projects','Courses','Socials','Special','Emails','Parking Lot'];
 var DEFAULT_PEOPLE = [
@@ -344,20 +477,21 @@ function loadState() {
     var d = localStorage.getItem(SK);
     if (d) {
       var p = JSON.parse(d);
-      return {cards:p.cards||dc(), people:p.people||dp(), sections:p.sections||ds(), theme:p.theme||'dark'};
+      return {cards:p.cards||dc(), people:p.people||dp(), sections:p.sections||ds(), priorities:p.priorities||dpr(), theme:p.theme||'dark'};
     }
   } catch(e) {}
-  return {cards:dc(), people:dp(), sections:ds(), theme:'dark'};
+  return {cards:dc(), people:dp(), sections:ds(), priorities:dpr(), theme:'dark'};
 }
 function dc(){return JSON.parse(JSON.stringify(DEFAULT_CARDS));}
 function dp(){return JSON.parse(JSON.stringify(DEFAULT_PEOPLE));}
 function ds(){return JSON.parse(JSON.stringify(DEFAULT_SECTIONS));}
+function dpr(){return JSON.parse(JSON.stringify(DEFAULT_PRIORITIES));}
 
 var S = loadState();
-var CARDS = S.cards, PEOPLE = S.people, SECTIONS = S.sections;
+var CARDS = S.cards, PEOPLE = S.people, SECTIONS = S.sections, PRIORITIES = S.priorities;
 var secF='all', statF='all', personF='all', searchQ='';
 var editId=null, selAs=[], bulkMode=false, bulkSel=[];
-var sortMode='none', currentView='board';
+var sortMode='none', sortDir=1, currentView='triage';
 var listSortCol='priority', listSortDir=1;
 var openDDs = {};
 var ARCHIVE = [];
@@ -366,7 +500,7 @@ document.body.className = S.theme;
 
 function persist() {
   try {
-    localStorage.setItem(SK, JSON.stringify({cards:CARDS, people:PEOPLE, sections:SECTIONS, theme:S.theme}));
+    localStorage.setItem(SK, JSON.stringify({cards:CARDS, people:PEOPLE, sections:SECTIONS, priorities:PRIORITIES, theme:S.theme}));
     var t=document.getElementById('save-tag'); t.classList.add('show');
     setTimeout(function(){t.classList.remove('show');}, 1500);
   } catch(e){}
@@ -414,9 +548,10 @@ function cardOk(c) {
 function sortCards(arr) {
   if(sortMode==='none') return arr;
   var a=arr.slice();
-  if(sortMode==='priority') a.sort(function(x,y){return (PRIO_ORDER[x.priority]||9)-(PRIO_ORDER[y.priority]||9);});
-  else if(sortMode==='deadline') a.sort(function(x,y){var dx=x.deadline?new Date(x.deadline):new Date(9999,0),dy=y.deadline?new Date(y.deadline):new Date(9999,0);return dx-dy;});
-  else if(sortMode==='assignee') a.sort(function(x,y){var px=x.assignees&&x.assignees[0]?gp(x.assignees[0]):null,py=y.assignees&&y.assignees[0]?gp(y.assignees[0]):null;if(!px&&!py)return 0;if(!px)return 1;if(!py)return -1;return px.name.localeCompare(py.name);});
+  var po=getPrioOrder();
+  if(sortMode==='priority') a.sort(function(x,y){return sortDir*((po[x.priority]??99)-(po[y.priority]??99));});
+  else if(sortMode==='deadline') a.sort(function(x,y){var dx=x.deadline?new Date(x.deadline):new Date(9999,0),dy=y.deadline?new Date(y.deadline):new Date(9999,0);return sortDir*(dx-dy);});
+  else if(sortMode==='assignee') a.sort(function(x,y){var px=x.assignees&&x.assignees[0]?gp(x.assignees[0]):null,py=y.assignees&&y.assignees[0]?gp(y.assignees[0]):null;if(!px&&!py)return 0;if(!px)return sortDir;if(!py)return -sortDir;return sortDir*px.name.localeCompare(py.name);});
   else if(sortMode==='unassigned') a.sort(function(x,y){var ux=!x.assignees||!x.assignees.length,uy=!y.assignees||!y.assignees.length;return ux===uy?0:ux?-1:1;});
   return a;
 }
@@ -430,11 +565,12 @@ function toggleDD(name) {
     if(name==='manage') document.getElementById('manage-dd').classList.remove('hidden');
     else if(name==='sort') {renderSortMenu(); positionDD('sort-dd','sort-btn');}
     else if(name==='asgn') {renderAsgnMenu(); positionDD('asgn-dd','asgn-btn');}
+    else if(name==='sec') {renderSecDD(); positionDD('sec-dd','sec-dd-btn');}
   }
 }
 function closeAllDD() {
   openDDs = {};
-  ['manage-dd','sort-dd','asgn-dd'].forEach(function(id){
+  ['manage-dd','sort-dd','asgn-dd','sec-dd'].forEach(function(id){
     var el=document.getElementById(id); if(el) el.classList.add('hidden');
   });
 }
@@ -447,7 +583,7 @@ function positionDD(menuId, btnId) {
   menu.style.top = (r.bottom+6)+'px';
 }
 document.addEventListener('click', function(e) {
-  var inDD = ['manage-wrap','sort-btn','sort-dd','asgn-btn','asgn-dd'].some(function(id){
+  var inDD = ['manage-wrap','sort-btn','sort-dd','asgn-btn','asgn-dd','sec-dd-wrap','sec-dd'].some(function(id){
     var el=document.getElementById(id); return el&&el.contains(e.target);
   });
   if(!inDD) closeAllDD();
@@ -459,17 +595,27 @@ function renderSortMenu() {
   var m=document.getElementById('sort-dd'); m.innerHTML='';
   SORT_OPTS.forEach(function(opt) {
     var el=document.createElement('div'); el.className='drop-item'+(sortMode===opt.v?' sel':'');
-    var lbl=document.createElement('span'); lbl.textContent=opt.l;
+    var lbl=document.createElement('span');
+    var dirIndicator = (sortMode===opt.v && (opt.v==='priority'||opt.v==='deadline'||opt.v==='assignee')) ? (sortDir===1?' ↑':' ↓') : '';
+    lbl.textContent=opt.l+dirIndicator;
     var chk=document.createElement('span'); chk.className='drop-check'; chk.textContent='\u2713';
     el.appendChild(lbl); el.appendChild(chk);
-    el.onclick=function(){sortMode=opt.v; closeAllDD(); updateSortBtn(); render();};
+    el.onclick=function(){
+      if(sortMode===opt.v && (opt.v==='priority'||opt.v==='deadline'||opt.v==='assignee')){
+        sortDir*=-1;
+      } else {
+        sortMode=opt.v; sortDir=1;
+      }
+      closeAllDD(); updateSortBtn(); render();
+    };
     m.appendChild(el);
   });
 }
 function updateSortBtn() {
   var btn=document.getElementById('sort-btn');
   var opt=SORT_OPTS.find(function(o){return o.v===sortMode;});
-  btn.textContent = sortMode==='none'?'Sort':'Sort: '+opt.l;
+  var dirLabel = sortMode!=='none' && (sortMode==='priority'||sortMode==='deadline'||sortMode==='assignee') ? (sortDir===1?' ↑':' ↓') : '';
+  btn.textContent = sortMode==='none'?'Sort':'Sort: '+opt.l+dirLabel;
   btn.classList.toggle('active', sortMode!=='none');
 }
 
@@ -494,16 +640,46 @@ function updateAsgnBtn() {
   else{var p=gp(personF); if(p){btn.textContent=p.name; btn.classList.add('filtered');}}
 }
 
-/* SECTION CHIPS */
+/* SECTION CHIPS — adaptive: chips when ≤5 sections, dropdown when more */
+var SEC_CHIP_THRESHOLD = 5;
 function renderSecChips() {
-  var row=document.getElementById('row-sections'); row.innerHTML='';
-  function mk(label,val){
-    var b=document.createElement('button'); b.className='chip'+(secF===val?' active':'');
-    b.textContent=label; b.onclick=function(){secF=val; renderSecChips(); render();};
-    row.appendChild(b);
+  var useDD = SECTIONS.length > SEC_CHIP_THRESHOLD;
+  var rowEl = document.getElementById('row-sections');
+  var ddWrap = document.getElementById('sec-dd-wrap');
+  rowEl.style.display = useDD ? 'none' : '';
+  ddWrap.style.display = useDD ? '' : 'none';
+  if(useDD) {
+    updateSecDDBtn();
+  } else {
+    rowEl.innerHTML = '';
+    function mk(label,val){
+      var b=document.createElement('button'); b.className='chip'+(secF===val?' active':'');
+      b.textContent=label; b.onclick=function(){secF=val; renderSecChips(); render();};
+      rowEl.appendChild(b);
+    }
+    mk('All','all');
+    SECTIONS.forEach(function(s){mk(s,s);});
   }
-  mk('All','all');
-  SECTIONS.forEach(function(s){mk(s,s);});
+}
+function updateSecDDBtn() {
+  var btn = document.getElementById('sec-dd-btn');
+  if(!btn) return;
+  var label = secF==='all' ? 'Section: All' : 'Section: '+secF;
+  btn.textContent = label + ' ▾';
+  btn.classList.toggle('active', secF!=='all');
+}
+function renderSecDD() {
+  var m = document.getElementById('sec-dd'); m.innerHTML='';
+  function mkItem(label, val){
+    var el=document.createElement('div'); el.className='drop-item'+(secF===val?' sel':'');
+    var lbl=document.createElement('span'); lbl.textContent=label; el.appendChild(lbl);
+    var chk=document.createElement('span'); chk.className='drop-check'; chk.textContent='✓'; el.appendChild(chk);
+    el.onclick=function(){secF=val; closeAllDD(); updateSecDDBtn(); render();};
+    return el;
+  }
+  m.appendChild(mkItem('All','all'));
+  var div=document.createElement('div'); div.className='drop-divider'; m.appendChild(div);
+  SECTIONS.forEach(function(s){m.appendChild(mkItem(s,s));});
 }
 
 /* STATUS CHIPS */
@@ -547,7 +723,7 @@ function buildCard(card) {
   parts.push('</div>');
   /* title + badge */
   parts.push('<div class="card-top"><span class="card-title">'+esc(card.title)+'</span>');
-  parts.push('<span class="badge '+bc(card.priority)+'">'+bl(card.priority));
+  parts.push('<span class="badge" '+badgeStyle(card.priority)+'>'+esc(bl(card.priority)));
   if(over) parts.push('<span class="tag tag-overdue" style="margin-left:4px">Overdue</span>');
   parts.push('</span></div>');
   /* deadline */
@@ -614,6 +790,7 @@ function render() {
   document.getElementById('ring').setAttribute('stroke-dashoffset',81.7-(pct/100)*81.7);
   renderStatChips();
   if(currentView==='list') renderListView();
+  if(currentView==='triage') renderTriageView();
 }
 
 /* DRAG DROP */
@@ -643,13 +820,204 @@ function toggleTask(cid,ti) {
 }
 function onSearch(){searchQ=document.getElementById('search-input').value.trim().toLowerCase(); render();}
 function toggleTheme(){S.theme=document.body.className==='dark'?'light':'dark'; document.body.className=S.theme; persist();}
-function toggleView(){
-  currentView=currentView==='board'?'list':'board';
-  document.getElementById('view-btn').textContent=currentView==='board'?'List view':'Board view';
-  document.getElementById('view-btn').classList.toggle('active',currentView==='list');
-  document.getElementById('board').classList.toggle('list-hidden',currentView==='list');
+function cycleView(){
+  var views=['board','list','triage'];
+  var idx=views.indexOf(currentView);
+  currentView=views[(idx+1)%3];
+  var btn=document.getElementById('view-btn');
+  if(currentView==='board'){btn.textContent='List view';btn.classList.remove('active');}
+  else if(currentView==='list'){btn.textContent='Triage view';btn.classList.add('active');}
+  else{btn.textContent='Board view';btn.classList.add('active');}
+  document.getElementById('board').classList.toggle('list-hidden',currentView!=='board');
   document.getElementById('list-view').classList.toggle('show',currentView==='list');
+  document.getElementById('triage-view').classList.toggle('show',currentView==='triage');
   if(currentView==='list') renderListView();
+  if(currentView==='triage') renderTriageView();
+}
+function applyView(){
+  var btn=document.getElementById('view-btn');
+  if(currentView==='board'){btn.textContent='List view';btn.classList.remove('active');}
+  else if(currentView==='list'){btn.textContent='Triage view';btn.classList.add('active');}
+  else{btn.textContent='Board view';btn.classList.add('active');}
+  document.getElementById('board').classList.toggle('list-hidden',currentView!=='board');
+  document.getElementById('list-view').classList.toggle('show',currentView==='list');
+  document.getElementById('triage-view').classList.toggle('show',currentView==='triage');
+}
+
+/* TRIAGE VIEW */
+var triageCollapsed = {};
+var triageDragId = null;
+
+function buildTriageRow(card) {
+  var row=document.createElement('div');
+  row.className='triage-row'+(isOverdue(card)?' overdue':'');
+  row.draggable=true;
+  row.dataset.cardId=card.id;
+
+  // drag handle
+  var handle=document.createElement('div'); handle.className='triage-drag-handle';
+  handle.innerHTML='<span></span><span></span><span></span>';
+  handle.addEventListener('mousedown',function(){row.draggable=true;});
+  row.appendChild(handle);
+
+  var allT=card.tasks.length,doneT=card.tasks.filter(function(t){return t.done;}).length;
+  // left
+  var left=document.createElement('div'); left.className='triage-row-left';
+  var dot=document.createElement('div'); dot.className='triage-row-status '+card.status; left.appendChild(dot);
+  var title=document.createElement('span'); title.className='triage-row-title'; title.textContent=card.title; left.appendChild(title);
+  row.appendChild(left);
+  // right
+  var right=document.createElement('div'); right.className='triage-row-right';
+  if(allT){var tsk=document.createElement('span');tsk.className='triage-row-tasks';tsk.textContent=doneT+'/'+allT;right.appendChild(tsk);}
+  if(card.deadline){var dl=document.createElement('span');dl.className='triage-row-dl'+(isOverdue(card)?'':' ok');dl.textContent=dlDisplay(card.deadline);right.appendChild(dl);}
+  var stLbl=document.createElement('span');stLbl.className='triage-row-status-lbl '+card.status;stLbl.textContent=COL_LABELS[card.status];right.appendChild(stLbl);
+  if(card.assignees&&card.assignees.length){
+    var avs=document.createElement('div'); avs.className='triage-row-avs';
+    card.assignees.forEach(function(pid){var p=gp(pid);if(p){var av=document.createElement('div');av.className='triage-row-av';av.style.background=p.color;av.title=p.name;av.textContent=ini(p.name);avs.appendChild(av);}});
+    right.appendChild(avs);
+  } else {
+    var no=document.createElement('span');no.className='triage-row-noowner';no.textContent='Unassigned';right.appendChild(no);
+  }
+  row.appendChild(right);
+
+  // drag events
+  row.addEventListener('dragstart',function(e){
+    triageDragId=card.id;
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain',String(card.id));
+    setTimeout(function(){row.classList.add('tr-dragging');},0);
+  });
+  row.addEventListener('dragend',function(){
+    triageDragId=null;
+    row.classList.remove('tr-dragging');
+    document.querySelectorAll('.tr-drag-over-top,.tr-drag-over-bottom').forEach(function(el){
+      el.classList.remove('tr-drag-over-top','tr-drag-over-bottom');
+    });
+    document.querySelectorAll('.tr-lane-over').forEach(function(el){el.classList.remove('tr-lane-over');});
+  });
+  row.addEventListener('dragover',function(e){
+    e.preventDefault(); e.stopPropagation();
+    if(triageDragId===card.id) return;
+    var rect=row.getBoundingClientRect();
+    var mid=rect.top+rect.height/2;
+    row.classList.remove('tr-drag-over-top','tr-drag-over-bottom');
+    row.classList.add(e.clientY<mid?'tr-drag-over-top':'tr-drag-over-bottom');
+  });
+  row.addEventListener('dragleave',function(e){
+    if(!row.contains(e.relatedTarget)){
+      row.classList.remove('tr-drag-over-top','tr-drag-over-bottom');
+    }
+  });
+  row.addEventListener('drop',function(e){
+    e.preventDefault(); e.stopPropagation();
+    var srcId=parseInt(e.dataTransfer.getData('text/plain'));
+    if(srcId===card.id) return;
+    var src=CARDS.find(function(c){return c.id===srcId;});
+    var tgt=card;
+    if(!src) return;
+    row.classList.remove('tr-drag-over-top','tr-drag-over-bottom');
+    // change priority to match target's priority lane
+    src.priority=tgt.priority;
+    src.updatedAt=Date.now();
+    persist(); renderTriageView();
+  });
+
+  row.onclick=function(e){
+    if(e.target===handle||handle.contains(e.target)) return;
+    openEdit(card.id);
+  };
+  return row;
+}
+function renderTriageView() {
+  var cards = CARDS.filter(cardOk);
+  var statusOrder={blocked:0,inprogress:1,todo:2,done:3};
+  var po=getPrioOrder();
+  // group cards by priority id
+  var grouped={};
+  PRIORITIES.forEach(function(p){grouped[p.id]=[];});
+  cards.forEach(function(c){
+    var pid=c.priority;
+    if(!grouped[pid]) grouped[pid]=[];
+    grouped[pid].push(c);
+  });
+  // sort within each group
+  Object.keys(grouped).forEach(function(k){
+    grouped[k].sort(function(a,b){
+      var sa=statusOrder[a.status]??9,sb=statusOrder[b.status]??9;
+      if(sa!==sb) return sa-sb;
+      return a.section.localeCompare(b.section);
+    });
+  });
+  // also collect overdue cards from any priority — mark them visually but keep in their lane
+  var container=document.getElementById('triage-lanes'); container.innerHTML='';
+  PRIORITIES.forEach(function(prio){
+    var items=grouped[prio.id]||[];
+    var laneEl=document.createElement('div');
+    laneEl.className='triage-lane'+(triageCollapsed[prio.id]?' collapsed':'');
+    laneEl.style.setProperty('--lane-color', prio.color);
+    // dynamic head colors via inline style
+    var headBg=hexToRgba(prio.color,.14);
+    var headBorder=hexToRgba(prio.color,.28);
+    // head
+    var head=document.createElement('div'); head.className='triage-lane-head';
+    head.style.cssText='background:'+headBg+';border-bottom:1px solid '+headBorder;
+    var indicator=document.createElement('div'); indicator.className='triage-lane-indicator';
+    indicator.style.cssText='width:3px;height:14px;border-radius:2px;background:'+prio.color+';flex-shrink:0';
+    var titleEl=document.createElement('span'); titleEl.className='triage-lane-title';
+    titleEl.style.color=prio.color; titleEl.textContent=prio.label.toUpperCase();
+    var badge=document.createElement('span'); badge.className='triage-lane-badge';
+    badge.style.cssText='background:'+hexToRgba(prio.color,.18)+';color:'+prio.color;
+    badge.textContent=items.length;
+    var chev=document.createElement('span'); chev.className='triage-lane-chevron'; chev.textContent='▼';
+    head.appendChild(indicator); head.appendChild(titleEl); head.appendChild(badge); head.appendChild(chev);
+    head.onclick=function(){triageCollapsed[prio.id]=!triageCollapsed[prio.id]; laneEl.classList.toggle('collapsed',triageCollapsed[prio.id]);};
+    laneEl.appendChild(head);
+    // body
+    var body=document.createElement('div'); body.className='triage-lane-body';
+    // lane-level drop (catches drops on empty space / between section groups)
+    body.addEventListener('dragover',function(e){
+      e.preventDefault();
+      body.classList.add('tr-lane-over');
+    });
+    body.addEventListener('dragleave',function(e){
+      if(!body.contains(e.relatedTarget)) body.classList.remove('tr-lane-over');
+    });
+    body.addEventListener('drop',function(e){
+      e.preventDefault();
+      body.classList.remove('tr-lane-over');
+      var srcId=parseInt(e.dataTransfer.getData('text/plain'));
+      var src=CARDS.find(function(c){return c.id===srcId;});
+      if(!src||src.priority===prio.id) return;
+      src.priority=prio.id;
+      src.updatedAt=Date.now();
+      persist(); renderTriageView();
+    });
+    if(!items.length){
+      var emp=document.createElement('div');emp.className='triage-empty';emp.textContent='No cards at this priority';body.appendChild(emp);
+    } else {
+      var sectionOrder=SECTIONS.concat(
+        items.map(function(c){return c.section;}).filter(function(s){return SECTIONS.indexOf(s)===-1;})
+      );
+      var bySec={};
+      items.forEach(function(c){if(!bySec[c.section])bySec[c.section]=[];bySec[c.section].push(c);});
+      sectionOrder.forEach(function(sec){
+        if(!bySec[sec]||!bySec[sec].length) return;
+        var secCards=bySec[sec];
+        var grp=document.createElement('div'); grp.className='triage-section-group';
+        var lbl=document.createElement('div'); lbl.className='triage-section-label';
+        var line1=document.createElement('div'); line1.className='triage-section-label-line';
+        var txt=document.createElement('span'); txt.className='triage-section-label-text'; txt.textContent=sec;
+        var cnt=document.createElement('span'); cnt.className='triage-section-label-count'; cnt.textContent=secCards.length;
+        var line2=document.createElement('div'); line2.className='triage-section-label-line';
+        lbl.appendChild(line1); lbl.appendChild(txt); lbl.appendChild(cnt); lbl.appendChild(line2);
+        grp.appendChild(lbl);
+        secCards.forEach(function(card){grp.appendChild(buildTriageRow(card));});
+        body.appendChild(grp);
+      });
+    }
+    laneEl.appendChild(body);
+    container.appendChild(laneEl);
+  });
 }
 
 /* LIST VIEW */
@@ -657,7 +1025,7 @@ function renderListView() {
   var tbl=document.getElementById('list-table'); tbl.innerHTML='';
   var cards=CARDS.filter(cardOk).slice().sort(function(a,b){
     var av,bv;
-    if(listSortCol==='priority'){av=PRIO_ORDER[a.priority]||9;bv=PRIO_ORDER[b.priority]||9;}
+    if(listSortCol==='priority'){var po=getPrioOrder();av=po[a.priority]??99;bv=po[b.priority]??99;}
     else if(listSortCol==='deadline'){av=a.deadline?new Date(a.deadline):new Date(9999,0);bv=b.deadline?new Date(b.deadline):new Date(9999,0);}
     else if(listSortCol==='title'){av=a.title.toLowerCase();bv=b.title.toLowerCase();}
     else if(listSortCol==='status'){av=COLS.indexOf(a.status);bv=COLS.indexOf(b.status);}
@@ -682,7 +1050,7 @@ function renderListView() {
     var over=isOverdue(card);
     var tdT=document.createElement('td'); tdT.innerHTML='<div class="lt-title">'+esc(card.title)+(card.recurring?'<span class="tag tag-recurring" style="margin-left:4px">Recurring</span>':'')+'</div>';
     var tdS=document.createElement('td'); tdS.innerHTML='<span class="lt-sub">'+esc(card.section)+'</span>';
-    var tdP=document.createElement('td'); tdP.innerHTML='<span class="badge '+bc(card.priority)+'">'+bl(card.priority)+'</span>';
+    var tdP=document.createElement('td'); tdP.innerHTML='<span class="badge" '+badgeStyle(card.priority)+'>'+esc(bl(card.priority))+'</span>';
     var tdSt=document.createElement('td'); tdSt.innerHTML='<span class="lt-status lt-'+card.status+'">'+COL_LABELS[card.status]+'</span>';
     var tdD=document.createElement('td'); tdD.innerHTML='<span class="lt-dl'+(over?' ov':'')+'">'+dlDisplay(card.deadline)+'</span>';
     var tdAv=document.createElement('td');
@@ -743,7 +1111,7 @@ document.addEventListener('keydown',function(e){
   if(tag==='input'||tag==='textarea'||tag==='select') return;
   if(e.key==='n'||e.key==='N') openAdd();
   if(e.key==='Escape'){
-    ['ov-card','ov-people','ov-sections','ov-archive','ov-wa'].forEach(function(id){document.getElementById(id).classList.remove('open');});
+    ['ov-card','ov-people','ov-sections','ov-priorities','ov-archive','ov-wa'].forEach(function(id){document.getElementById(id).classList.remove('open');});
     closeAllDD(); if(bulkMode) exitBulk();
   }
 });
@@ -752,6 +1120,11 @@ document.addEventListener('keydown',function(e){
 function populateSecDrop(){
   var s=document.getElementById('f-section'); s.innerHTML='';
   SECTIONS.forEach(function(x){var o=document.createElement('option');o.value=x;o.textContent=x;s.appendChild(o);});
+}
+function populatePrioDrop(selectedVal){
+  var s=document.getElementById('f-priority'); s.innerHTML='';
+  PRIORITIES.forEach(function(p){var o=document.createElement('option');o.value=p.id;o.textContent=p.label;s.appendChild(o);});
+  if(selectedVal) s.value=selectedVal;
 }
 function renderApRow(){
   var row=document.getElementById('ap-row'); row.innerHTML='';
@@ -784,7 +1157,8 @@ function openAdd(){
   document.getElementById('card-title-lbl').textContent='Add card';
   document.getElementById('f-title').value='';
   populateSecDrop(); document.getElementById('f-section').value=secF!=='all'?secF:SECTIONS[0];
-  document.getElementById('f-priority').value='thisweek'; document.getElementById('f-status').value='todo';
+  populatePrioDrop(PRIORITIES[2]?PRIORITIES[2].id:PRIORITIES[0].id);
+  document.getElementById('f-status').value='todo';
   document.getElementById('f-deadline').value=''; document.getElementById('f-notes').value='';
   document.getElementById('f-recurring').checked=false; document.getElementById('btn-del').style.display='none';
   renderApRow(); renderTaskFields([]);
@@ -796,7 +1170,8 @@ function openEdit(cid){
   document.getElementById('card-title-lbl').textContent='Edit card';
   document.getElementById('f-title').value=card.title;
   populateSecDrop(); document.getElementById('f-section').value=card.section;
-  document.getElementById('f-priority').value=card.priority; document.getElementById('f-status').value=card.status;
+  populatePrioDrop(card.priority);
+  document.getElementById('f-status').value=card.status;
   document.getElementById('f-deadline').value=card.deadline||'';
   document.getElementById('f-notes').value=card.notes||'';
   document.getElementById('f-recurring').checked=!!card.recurring;
@@ -863,6 +1238,65 @@ function addPerson(){
   persist(); renderPeopleList(); render(); renderApRow();
 }
 
+/* PRIORITIES */
+function openPriorities(){
+  renderPrioritiesList();
+  document.getElementById('new-priority-name').value='';
+  document.getElementById('ov-priorities').classList.add('open');
+}
+function renderPrioritiesList(){
+  var list=document.getElementById('priorities-list'); list.innerHTML='';
+  PRIORITIES.forEach(function(p,idx){
+    var row=document.createElement('div'); row.className='list-row'; row.style.cursor='default';
+    // color swatch
+    var swatch=document.createElement('div');
+    swatch.style.cssText='width:12px;height:12px;border-radius:50%;background:'+p.color+';flex-shrink:0';
+    // name
+    var nm=document.createElement('span'); nm.className='list-lbl'; nm.textContent=p.label;
+    // order controls
+    var acts=document.createElement('div'); acts.className='list-acts';
+    if(idx>0){
+      var up=document.createElement('button'); up.className='sm-btn'; up.textContent='▲';
+      up.title='Move up (higher severity)';
+      up.onclick=function(){var t=PRIORITIES[idx-1];PRIORITIES[idx-1]=PRIORITIES[idx];PRIORITIES[idx]=t;persist();renderPrioritiesList();if(currentView==='triage')renderTriageView();};
+      acts.appendChild(up);
+    }
+    if(idx<PRIORITIES.length-1){
+      var dn=document.createElement('button'); dn.className='sm-btn'; dn.textContent='▼';
+      dn.title='Move down (lower severity)';
+      dn.onclick=function(){var t=PRIORITIES[idx+1];PRIORITIES[idx+1]=PRIORITIES[idx];PRIORITIES[idx]=t;persist();renderPrioritiesList();if(currentView==='triage')renderTriageView();};
+      acts.appendChild(dn);
+    }
+    // color picker
+    var ci=document.createElement('input'); ci.type='color'; ci.value=p.color;
+    ci.style.cssText='width:22px;height:22px;border:none;border-radius:50%;cursor:pointer;padding:0;flex-shrink:0';
+    ci.oninput=function(){p.color=ci.value;swatch.style.background=p.color;persist();render();};
+    acts.appendChild(ci);
+    // remove (only if more than 1 priority)
+    if(PRIORITIES.length>1){
+      var del=document.createElement('button'); del.className='sm-btn danger'; del.textContent='Remove';
+      del.onclick=function(){
+        PRIORITIES.splice(idx,1);
+        // reassign cards with removed priority to next available
+        var fallback=PRIORITIES[0].id;
+        CARDS.forEach(function(c){if(c.priority===p.id)c.priority=fallback;});
+        persist(); renderPrioritiesList(); populatePrioDrop(); render();
+      };
+      acts.appendChild(del);
+    }
+    row.appendChild(swatch); row.appendChild(nm); row.appendChild(acts); list.appendChild(row);
+  });
+}
+function addPriority(){
+  var name=document.getElementById('new-priority-name').value.trim();
+  if(!name) return;
+  var color=document.getElementById('new-priority-color').value;
+  var id='prio_'+name.toLowerCase().replace(/[^a-z0-9]/g,'_')+'_'+Date.now();
+  PRIORITIES.push({id:id,label:name,color:color});
+  document.getElementById('new-priority-name').value='';
+  persist(); renderPrioritiesList(); render();
+}
+
 /* SECTIONS */
 function openSections(){renderSectionsList(); document.getElementById('new-section').value=''; document.getElementById('ov-sections').classList.add('open');}
 function renderSectionsList(){
@@ -915,15 +1349,16 @@ function genWA(){
   var cards=CARDS.filter(function(c){return filter==='all'||c.section===filter;});
   var secs={};
   cards.forEach(function(c){if(!secs[c.section])secs[c.section]=[];secs[c.section].push(c);});
-  var PLABELS={urgent:'[URGENT]',thisweek:'[THIS WEEK]',planning:'[PLANNING]'};
+  var po=getPrioOrder();
   var lines=['*SNAPDRUM TRIAGE*','━━━━━━━━━━━━━━━━━━━'];
   Object.keys(secs).forEach(function(sec){
     lines.push('\n*'+sec.toUpperCase()+'*');
-    secs[sec].sort(function(a,b){return (PRIO_ORDER[a.priority]||9)-(PRIO_ORDER[b.priority]||9);});
+    secs[sec].sort(function(a,b){return (po[a.priority]??99)-(po[b.priority]??99);});
     secs[sec].forEach(function(c){
       var owner=c.assignees&&c.assignees.length?' -> '+c.assignees.map(function(pid){var p=gp(pid);return p?p.name:'?';}).join(', '):'';
       var dl=c.deadline?' ['+dlDisplay(c.deadline)+']':'';
-      lines.push((PLABELS[c.priority]||'')+ ' *'+c.title+'*'+dl+owner);
+      var plabel=bl(c.priority);
+      lines.push('['+plabel.toUpperCase()+'] *'+c.title+'*'+dl+owner);
       c.tasks.forEach(function(t){lines.push('  '+(t.done?'[x]':'[ ]')+' '+t.t);});
     });
     lines.push('━━━━━━━━━━━━━━━━━━━');
@@ -945,6 +1380,7 @@ function closeOv(id){document.getElementById(id).classList.remove('open'); editI
 function init(){
   wireDragDrop();
   renderSecChips();
+  applyView();
   render();
 }
 if(document.readyState==='loading'){
