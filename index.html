@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Snapdrum Triage</title>
+<link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -34,7 +35,7 @@ body.light .toggle::after{transform:translateX(14px)}
 .row-sections::-webkit-scrollbar{display:none}
 .tdiv{width:1px;height:18px;background:var(--border);flex-shrink:0;margin:0 8px}
 .row-status{display:flex;align-items:center;gap:4px;padding:10px 0;flex-shrink:0}
-.row-actions{display:flex;align-items:center;gap:6px;padding:10px 0 10px 10px;flex-shrink:0;border-left:1px solid var(--border);margin-left:8px}
+.row-actions{display:flex;align-items:center;gap:6px;padding:10px 0 10px 10px;flex-shrink:0;border-left:1px solid var(--border);margin-left:auto}
 .chip{font-size:12px;padding:4px 10px;border-radius:6px;border:1px solid transparent;background:transparent;color:var(--text2);cursor:pointer;white-space:nowrap;transition:all .15s;font-family:inherit;flex-shrink:0}
 .chip:hover{background:var(--surface2);color:var(--text)}
 .chip.active{background:var(--accent-dim);color:var(--accent);border-color:var(--accent)}
@@ -158,6 +159,12 @@ body.light .lt-done{background:#edfaf3;color:#2d8c5a}
 .notes-field{width:100%;background:var(--input);border:1px solid var(--border);border-radius:6px;padding:7px 10px;color:var(--text);font-size:12px;font-family:inherit;outline:none;resize:vertical;min-height:56px;line-height:1.5;transition:border-color .15s}
 .notes-field:focus{border-color:var(--accent)}
 .task-edit-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.task-edit-cb{width:15px;height:15px;border-radius:3px;border:1px solid var(--border2);background:transparent;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.task-edit-cb:hover{border-color:var(--accent)}
+.task-edit-cb.checked{background:var(--accent);border-color:var(--accent)}
+.task-edit-cb.checked::after{content:"";display:block;width:4px;height:6px;border:1.5px solid #fff;border-top:none;border-left:none;transform:rotate(45deg);margin-top:-1px}
+.task-edit-row input.done-task{color:var(--text3);text-decoration:line-through}
+
 .task-edit-row input{flex:1}
 .rm-btn{font-size:16px;color:var(--text3);background:none;border:none;cursor:pointer;padding:0 4px;line-height:1;flex-shrink:0}
 .rm-btn:hover{color:var(--red)}
@@ -253,6 +260,50 @@ body.light .triage-row-status-lbl.done{background:#edfaf3;color:#2d8c5a}
 .sec-dd-btn.active{background:var(--accent-dim);color:var(--accent);border-color:var(--accent)}
 .sec-dd-menu{position:fixed;background:var(--modal);border:1px solid var(--border2);border-radius:10px;padding:6px;min-width:180px;z-index:200;box-shadow:0 8px 24px var(--shadow);max-height:280px;overflow-y:auto}
 .sec-dd-menu.hidden{display:none}
+
+/* VIEW CHIPS */
+.view-chips{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden;flex-shrink:0}
+.view-chip{font-size:12px;padding:4px 11px;border:none;border-right:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .15s}
+.view-chip:last-child{border-right:none}
+.view-chip:hover{background:var(--surface2);color:var(--text)}
+.view-chip.active{background:var(--accent-dim);color:var(--accent)}
+/* SUBTASKS */
+.triage-subtasks{display:none;padding:6px 14px 8px 44px;border-top:1px solid var(--border);background:var(--surface2);flex-direction:column;gap:4px}
+.triage-subtasks.open{display:flex}
+.triage-subtask-row{display:flex;align-items:flex-start;gap:7px}
+.triage-expand-btn{font-size:10px;color:var(--text3);background:none;border:1px solid var(--border);border-radius:3px;cursor:pointer;padding:1px 6px;font-family:'DM Mono',monospace;flex-shrink:0;transition:all .15s;line-height:1.5}
+.triage-expand-btn:hover{border-color:var(--accent);color:var(--accent)}
+.lt-subtask-tr td{padding:0!important;border-bottom:none}
+.lt-subtasks{display:flex;flex-direction:column;gap:3px;padding:5px 12px 8px 28px;background:var(--surface2)}
+.lt-subtask-row{display:flex;align-items:flex-start;gap:7px;padding:2px 0}
+.lt-task-txt{font-size:11px;color:var(--text2);line-height:1.45}
+.lt-task-txt.done{color:var(--text3);text-decoration:line-through}
+.lt-expand-arrow{font-size:10px;color:var(--text3);margin-left:4px}
+
+
+/* MODAL TABS */
+.modal-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:14px}
+.modal-tab{font-size:12px;padding:7px 14px;border:none;background:transparent;color:var(--text3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.modal-tab:hover{color:var(--text2)}
+.modal-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.modal-pane{display:none}
+.modal-pane.active{display:block}
+/* HISTORY */
+.history-list{display:flex;flex-direction:column;gap:0;max-height:320px;overflow-y:auto}
+.history-empty{font-size:12px;color:var(--text3);text-align:center;padding:32px 0;font-style:italic}
+.history-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.history-item:last-child{border-bottom:none}
+.history-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:1px}
+.hi-status{background:var(--accent-dim);color:var(--accent)}
+.hi-priority{background:var(--amber-dim);color:var(--amber)}
+.hi-assignee{background:#1a1a2e;color:#4db8ff}
+body.light .hi-assignee{background:#e8f4ff;color:#0070cc}
+.hi-task{background:var(--green-dim,#0d2318);color:#3ddc84}
+body.light .hi-task{background:#edfaf3;color:#2d8c5a}
+.history-body{flex:1;min-width:0}
+.history-text{font-size:12px;color:var(--text);line-height:1.4}
+.history-time{font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:2px}
+
 @media(max-width:900px){.board{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.board{grid-template-columns:1fr;padding:10px}.topbar,.toolbar,.bulk-bar{padding-left:12px;padding-right:12px}}
 </style>
@@ -305,7 +356,7 @@ body.light .triage-row-status-lbl.done{background:#edfaf3;color:#2d8c5a}
   <div class="row-status" id="row-status"></div>
   <div class="row-actions">
     <div class="search-wrap"><span class="search-icon">&#9906;</span><input class="search-input" id="search-input" placeholder="Search..." oninput="onSearch()" onkeydown="if(event.key==='Escape'){this.value='';onSearch();}"/></div>
-    <button class="view-btn" id="view-btn" onclick="cycleView()">List view</button>
+    <div class="view-chips" id="view-chips"><button class="view-chip" id="vc-triage" onclick="setView('triage')">Triage</button><button class="view-chip" id="vc-board" onclick="setView('board')">Board</button><button class="view-chip" id="vc-list" onclick="setView('list')">List</button></div>
     <button class="sort-btn" id="sort-btn" onclick="toggleDD('sort')">Sort</button>
     <div class="drop-wrap"><div class="drop-menu hidden" id="sort-dd"></div></div>
     <button class="tool-btn" id="bulk-btn" onclick="toggleBulk()">Select</button>
@@ -340,6 +391,11 @@ body.light .triage-row-status-lbl.done{background:#edfaf3;color:#2d8c5a}
 <div class="overlay" id="ov-card" onclick="if(event.target===this)closeOv('ov-card')">
   <div class="modal">
     <div class="modal-title" id="card-title-lbl">Add card</div>
+    <div class="modal-tabs" id="modal-tabs">
+      <button class="modal-tab active" id="tab-details" onclick="switchTab('details')">Details</button>
+      <button class="modal-tab" id="tab-history" onclick="switchTab('history')" style="display:none">History</button>
+    </div>
+    <div class="modal-pane active" id="pane-details">
     <div class="form-row">
       <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="f-title" placeholder="Card title"/></div>
       <div class="form-group"><label class="form-label">Section</label><select class="form-input" id="f-section"></select></div>
@@ -353,6 +409,8 @@ body.light .triage-row-status-lbl.done{background:#edfaf3;color:#2d8c5a}
     <div class="check-row"><input type="checkbox" id="f-recurring"/><label for="f-recurring">Recurring — resets to To do when moved to Done</label></div>
     <div class="form-group"><label class="form-label">Assignees</label><div class="ap-row" id="ap-row"></div></div>
     <div class="form-group"><label class="form-label">Tasks</label><div id="tasks-ed"></div><button class="add-field-btn" onclick="addTaskField()">+ Add task</button></div>
+    </div><!-- /pane-details -->
+    <div class="modal-pane" id="pane-history"><div class="history-list" id="history-list"></div></div>
     <div class="modal-foot"><button class="btn-del" id="btn-del" onclick="deleteCard()" style="display:none">Delete</button><button class="btn-cancel" onclick="closeOv('ov-card')">Cancel</button><button class="btn-save" onclick="saveCard()">Save</button></div>
   </div>
 </div>
@@ -816,10 +874,58 @@ function wireDragDrop() {
 
 function toggleTask(cid,ti) {
   var c=CARDS.find(function(x){return x.id===cid;});
-  if(c){c.tasks[ti].done=!c.tasks[ti].done; persist(); render();}
+  if(c){
+    c.tasks[ti].done=!c.tasks[ti].done;
+    if(c.tasks[ti].done) addHistory(c,"task","Task done: "+c.tasks[ti].t);
+    persist(); render();
+  }
 }
 function onSearch(){searchQ=document.getElementById('search-input').value.trim().toLowerCase(); render();}
 function toggleTheme(){S.theme=document.body.className==='dark'?'light':'dark'; document.body.className=S.theme; persist();}
+
+/* ── VIEW SWITCHER ── */
+function setView(v) {
+  currentView = v;
+  ['triage','board','list'].forEach(function(n){
+    var el=document.getElementById('vc-'+n); if(el) el.classList.toggle('active',n===v);
+  });
+  document.getElementById('board').classList.toggle('list-hidden', v!=='board');
+  document.getElementById('list-view').classList.toggle('show', v==='list');
+  document.getElementById('triage-view').classList.toggle('show', v==='triage');
+  if(v==='list') renderListView();
+  if(v==='triage') renderTriageView();
+}
+
+/* ── TRIAGE TASK TOGGLE (no full re-render) ── */
+function toggleTriageTask(cardId, ti) {
+  var card=CARDS.find(function(c){return c.id===cardId;}); if(!card) return;
+  var wasDone2=card.tasks[ti].done; card.tasks[ti].done=!card.tasks[ti].done;
+  if(card.tasks[ti].done&&!wasDone2) addHistory(card,"task","Task done: "+card.tasks[ti].t);
+  persist();
+  // update checkbox + label in place
+  var rowEl=document.querySelector('[data-card-id="'+cardId+'"]');
+  if(rowEl){
+    var cbs=rowEl.querySelectorAll('.triage-subtask-row .cb');
+    var lbls=rowEl.querySelectorAll('.triage-subtask-row .task-txt');
+    if(cbs[ti]) cbs[ti].classList.toggle('checked', card.tasks[ti].done);
+    if(lbls[ti]) lbls[ti].classList.toggle('done', card.tasks[ti].done);
+    var doneT=card.tasks.filter(function(t){return t.done;}).length;
+    var tskEl=rowEl.querySelector('.triage-row-tasks'); if(tskEl) tskEl.textContent=doneT+'/'+card.tasks.length;
+  }
+  // update ring
+  var at=0,dt=0; CARDS.forEach(function(c){at+=c.tasks.length;dt+=c.tasks.filter(function(t){return t.done;}).length;});
+  var pct=at?Math.round(dt/at*100):0;
+  document.getElementById('ring-pct').textContent=pct+'%';
+  document.getElementById('ring').setAttribute('stroke-dashoffset',81.7-(pct/100)*81.7);
+}
+
+/* ── LIST TASK TOGGLE ── */
+function toggleListTask(cardId, ti) {
+  var card=CARDS.find(function(c){return c.id===cardId;}); if(!card) return;
+  card.tasks[ti].done=!card.tasks[ti].done;
+  persist(); renderListView();
+}
+
 function cycleView(){
   var views=['board','list','triage'];
   var idx=views.indexOf(currentView);
@@ -834,15 +940,7 @@ function cycleView(){
   if(currentView==='list') renderListView();
   if(currentView==='triage') renderTriageView();
 }
-function applyView(){
-  var btn=document.getElementById('view-btn');
-  if(currentView==='board'){btn.textContent='List view';btn.classList.remove('active');}
-  else if(currentView==='list'){btn.textContent='Triage view';btn.classList.add('active');}
-  else{btn.textContent='Board view';btn.classList.add('active');}
-  document.getElementById('board').classList.toggle('list-hidden',currentView!=='board');
-  document.getElementById('list-view').classList.toggle('show',currentView==='list');
-  document.getElementById('triage-view').classList.toggle('show',currentView==='triage');
-}
+function applyView(){ setView(currentView); }
 
 /* TRIAGE VIEW */
 var triageCollapsed = {};
@@ -922,8 +1020,37 @@ function buildTriageRow(card) {
     persist(); renderTriageView();
   });
 
+  // attach card id for in-place updates
+  row.dataset.cardId = card.id;
+
+  // subtask expand button + panel
+  if(allT) {
+    var expBtn=document.createElement("button"); expBtn.className="triage-expand-btn";
+    expBtn.textContent="▶ "+allT+" tasks";
+    expBtn.title="Show/hide tasks";
+    right.insertBefore(expBtn, right.firstChild);
+    var subPanel=document.createElement("div"); subPanel.className="triage-subtasks";
+    card.tasks.forEach(function(tk,i){
+      var sr=document.createElement("div"); sr.className="triage-subtask-row";
+      var cb=document.createElement("div"); cb.className="cb"+(tk.done?" checked":"");
+      (function(idx){
+        cb.addEventListener("click",function(e){e.stopPropagation();toggleTriageTask(card.id,idx);});
+      })(i);
+      var lbl=document.createElement("span"); lbl.className="task-txt"+(tk.done?" done":""); lbl.textContent=tk.t;
+      sr.appendChild(cb); sr.appendChild(lbl); subPanel.appendChild(sr);
+    });
+    row.appendChild(subPanel);
+    expBtn.addEventListener("click",function(e){
+      e.stopPropagation();
+      var open=subPanel.classList.toggle("open");
+      expBtn.textContent=(open?"▼ ":"▶ ")+allT+" tasks";
+    });
+  }
+
   row.onclick=function(e){
     if(e.target===handle||handle.contains(e.target)) return;
+    if(e.target.classList.contains("triage-expand-btn")) return;
+    if(e.target.classList.contains("cb")||e.target.classList.contains("task-txt")) return;
     openEdit(card.id);
   };
   return row;
@@ -1061,6 +1188,32 @@ function renderListView() {
     var tdAct=document.createElement('td'); var eb=document.createElement('button'); eb.className='lt-edit'; eb.textContent='Edit'; eb.onclick=function(){openEdit(card.id);}; tdAct.appendChild(eb);
     [tdT,tdS,tdP,tdSt,tdD,tdAv,tdAct].forEach(function(td){tr.appendChild(td);});
     tbody.appendChild(tr);
+    // expandable subtask row
+    if(card.tasks && card.tasks.length) {
+      var subTr=document.createElement("tr");
+      var subTd=document.createElement("td"); subTd.colSpan=7; subTd.style.padding="0";
+      var subDiv=document.createElement("div"); subDiv.className="lt-subtasks";
+      card.tasks.forEach(function(tk,i){
+        var sr=document.createElement("div"); sr.className="lt-subtask-row";
+        var cb=document.createElement("div"); cb.className="cb"+(tk.done?" checked":"");
+        (function(idx){
+          cb.addEventListener("click",function(e){e.stopPropagation();toggleListTask(card.id,idx);});
+        })(i);
+        var lbl=document.createElement("span"); lbl.className="lt-task-txt"+(tk.done?" done":""); lbl.textContent=tk.t;
+        sr.appendChild(cb); sr.appendChild(lbl); subDiv.appendChild(sr);
+      });
+      subTd.appendChild(subDiv); subTr.appendChild(subTd); tbody.appendChild(subTr);
+      // click title to toggle
+      var expanded=true;
+      var arrow=document.createElement("span"); arrow.className="lt-expand-arrow"; arrow.textContent=" ▾";
+      tdT.querySelector(".lt-title").appendChild(arrow);
+      tdT.style.cursor="pointer";
+      tdT.addEventListener("click",function(){
+        expanded=!expanded;
+        subTr.style.display=expanded?"":"none";
+        arrow.textContent=expanded?" ▾":" ▸";
+      });
+    }
   });
   tbl.appendChild(tbody);
 }
@@ -1140,17 +1293,31 @@ function renderTaskFields(tasks){
   var ed=document.getElementById('tasks-ed'); ed.innerHTML='';
   tasks.forEach(function(tk){
     var row=document.createElement('div'); row.className='task-edit-row';
-    var inp=document.createElement('input'); inp.className='form-input'; inp.value=tk.t; inp.placeholder='Task description';
-    var rm=document.createElement('button'); rm.className='rm-btn'; rm.type='button'; rm.textContent='\xD7'; rm.onclick=function(){row.remove();};
-    row.appendChild(inp); row.appendChild(rm); ed.appendChild(row);
+    // tick checkbox
+    var cb=document.createElement('div'); cb.className='task-edit-cb'+(tk.done?' checked':'');
+    cb.addEventListener('click',function(){
+      cb.classList.toggle('checked');
+      inp.classList.toggle('done-task', cb.classList.contains('checked'));
+    });
+    var inp=document.createElement('input'); inp.className='form-input'+(tk.done?' done-task':'');
+    inp.value=tk.t; inp.placeholder='Task description';
+    var rm=document.createElement('button'); rm.className='rm-btn'; rm.type='button'; rm.textContent='\xD7';
+    rm.onclick=function(){row.remove();};
+    row.appendChild(cb); row.appendChild(inp); row.appendChild(rm); ed.appendChild(row);
   });
 }
 function addTaskField(){
   var ed=document.getElementById('tasks-ed');
   var row=document.createElement('div'); row.className='task-edit-row';
+  var cb=document.createElement('div'); cb.className='task-edit-cb';
   var inp=document.createElement('input'); inp.className='form-input'; inp.placeholder='Task description';
-  var rm=document.createElement('button'); rm.className='rm-btn'; rm.type='button'; rm.textContent='\xD7'; rm.onclick=function(){row.remove();};
-  row.appendChild(inp); row.appendChild(rm); ed.appendChild(row); inp.focus();
+  cb.addEventListener('click',function(){
+    cb.classList.toggle('checked');
+    inp.classList.toggle('done-task', cb.classList.contains('checked'));
+  });
+  var rm=document.createElement('button'); rm.className='rm-btn'; rm.type='button'; rm.textContent='\xD7';
+  rm.onclick=function(){row.remove();};
+  row.appendChild(cb); row.appendChild(inp); row.appendChild(rm); ed.appendChild(row); inp.focus();
 }
 function openAdd(){
   editId=null; selAs=[];
@@ -1161,6 +1328,8 @@ function openAdd(){
   document.getElementById('f-status').value='todo';
   document.getElementById('f-deadline').value=''; document.getElementById('f-notes').value='';
   document.getElementById('f-recurring').checked=false; document.getElementById('btn-del').style.display='none';
+  document.getElementById('tab-history').style.display='none';
+  switchTab('details');
   renderApRow(); renderTaskFields([]);
   document.getElementById('ov-card').classList.add('open');
 }
@@ -1176,13 +1345,59 @@ function openEdit(cid){
   document.getElementById('f-notes').value=card.notes||'';
   document.getElementById('f-recurring').checked=!!card.recurring;
   document.getElementById('btn-del').style.display='block';
+  document.getElementById('tab-history').style.display='';
+  switchTab('details');
   renderApRow(); renderTaskFields(card.tasks);
   document.getElementById('ov-card').classList.add('open');
 }
+
+/* ── HISTORY ── */
+function addHistory(card, type, text) {
+  if(!card.history) card.history=[];
+  card.history.push({type:type, text:text, ts:Date.now()});
+}
+function timeAgoFull(ts){
+  var d=Math.floor((Date.now()-ts)/1000);
+  if(d<60) return 'just now';
+  if(d<3600) return Math.floor(d/60)+'m ago';
+  if(d<86400) return Math.floor(d/3600)+'h ago';
+  if(d<604800) return Math.floor(d/86400)+'d ago';
+  return new Date(ts).toLocaleDateString();
+}
+function switchTab(tab) {
+  ['details','history'].forEach(function(t){
+    document.getElementById('tab-'+t).classList.toggle('active',t===tab);
+    document.getElementById('pane-'+t).classList.toggle('active',t===tab);
+  });
+  if(tab==='history') renderHistory();
+}
+function renderHistory() {
+  var list=document.getElementById('history-list'); list.innerHTML='';
+  var card=editId?CARDS.find(function(c){return c.id===editId;}):null;
+  if(!card||!card.history||!card.history.length){
+    list.innerHTML='<div class="history-empty">No history yet</div>'; return;
+  }
+  card.history.slice().reverse().forEach(function(ev){
+    var item=document.createElement('div'); item.className='history-item';
+    var iconClass={status:'hi-status',priority:'hi-priority',assignee:'hi-assignee',task:'hi-task'}[ev.type]||'hi-status';
+    var iconChar={status:'⇄',priority:'↑',assignee:'@',task:'✓'}[ev.type]||'·';
+    item.innerHTML=
+      '<div class="history-icon '+iconClass+'">'+iconChar+'</div>'+
+      '<div class="history-body">'+
+        '<div class="history-text">'+esc(ev.text)+'</div>'+
+        '<div class="history-time">'+timeAgoFull(ev.ts)+'</div>'+
+      '</div>';
+    list.appendChild(item);
+  });
+}
+
 function saveCard(){
   var title=document.getElementById('f-title').value.trim(); if(!title) return;
-  var inputs=document.getElementById('tasks-ed').querySelectorAll('input');
-  var tasks=[]; inputs.forEach(function(i){var v=i.value.trim();if(v)tasks.push({t:v,done:false});});
+  var rows=document.getElementById('tasks-ed').querySelectorAll('.task-edit-row');
+  var tasks=[]; rows.forEach(function(row){
+    var inp=row.querySelector('input'); var cb=row.querySelector('.task-edit-cb');
+    if(inp){var v=inp.value.trim(); if(v) tasks.push({t:v, done:cb?cb.classList.contains('checked'):false});}
+  });
   var dl=document.getElementById('f-deadline').value;
   var notes=document.getElementById('f-notes').value.trim();
   var rec=document.getElementById('f-recurring').checked;
@@ -1190,11 +1405,22 @@ function saveCard(){
     var card=CARDS.find(function(c){return c.id===editId;});
     if(card){
       var old=card.tasks;
+      var oldStatus=card.status, oldPriority=card.priority, oldAssignees=(card.assignees||[]).slice();
+      var newStatus=document.getElementById('f-status').value;
+      var newPriority=document.getElementById('f-priority').value;
       card.title=title; card.section=document.getElementById('f-section').value;
-      card.priority=document.getElementById('f-priority').value; card.status=document.getElementById('f-status').value;
+      card.priority=newPriority; card.status=newStatus;
       card.deadline=dl; card.notes=notes; card.recurring=rec; card.assignees=selAs.slice();
       card.tasks=tasks.map(function(tk,i){return{t:tk.t,done:old[i]?old[i].done:false};});
       card.updatedAt=Date.now();
+      // track changes
+      var COL_MAP={todo:"To do",inprogress:"In progress",blocked:"Blocked",done:"Done"};
+      if(oldStatus!==newStatus) addHistory(card,"status","Status: "+COL_MAP[oldStatus]+" → "+COL_MAP[newStatus]);
+      if(oldPriority!==newPriority) addHistory(card,"priority","Priority: "+bl(oldPriority)+" → "+bl(newPriority));
+      var addedAs=selAs.filter(function(id){return oldAssignees.indexOf(id)===-1;});
+      var removedAs=oldAssignees.filter(function(id){return selAs.indexOf(id)===-1;});
+      addedAs.forEach(function(id){var p=gp(id);if(p)addHistory(card,"assignee","Assigned: "+p.name);});
+      removedAs.forEach(function(id){var p=gp(id);if(p)addHistory(card,"assignee","Unassigned: "+p.name);});
     }
   } else {
     var nid=CARDS.length?Math.max.apply(null,CARDS.map(function(c){return c.id;}))+1:1;
