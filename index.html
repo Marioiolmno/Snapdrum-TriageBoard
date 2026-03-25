@@ -304,6 +304,78 @@ body.light .hi-task{background:#edfaf3;color:#2d8c5a}
 .history-text{font-size:12px;color:var(--text);line-height:1.4}
 .history-time{font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:2px}
 
+
+/* IMPORT MODAL */
+.import-area{width:100%;background:var(--input);border:1px solid var(--border);border-radius:8px;
+  padding:10px;color:var(--text);font-size:13px;font-family:inherit;outline:none;
+  resize:vertical;min-height:120px;line-height:1.6;transition:border-color .15s}
+.import-area:focus{border-color:var(--accent)}
+.import-area::placeholder{color:var(--text3)}
+.import-cards-preview{display:flex;flex-direction:column;gap:8px;margin-top:4px;max-height:420px;overflow-y:auto}
+.import-card-preview{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;position:relative}
+.import-card-preview.selected{border-color:var(--accent)}
+.import-card-preview.existing{border-color:var(--amber);background:var(--amber-dim)}
+.icp-header{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
+.icp-check{width:16px;height:16px;border-radius:4px;border:1px solid var(--border2);
+  background:transparent;flex-shrink:0;margin-top:2px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .15s}
+.icp-check:hover{border-color:var(--accent)}
+.icp-check.on{background:var(--accent);border-color:var(--accent)}
+.icp-check.on::after{content:'';display:block;width:5px;height:8px;border:2px solid #fff;
+  border-top:none;border-left:none;transform:rotate(45deg);margin-top:-2px}
+.icp-title-wrap{flex:1;min-width:0}
+.icp-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:3px}
+.icp-existing-label{font-size:10px;color:var(--amber);font-weight:600;text-transform:uppercase;
+  letter-spacing:.05em;margin-bottom:3px}
+.icp-meta{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+.icp-tag{font-size:10px;padding:2px 8px;border-radius:99px;border:1px solid var(--border2);
+  color:var(--text2);display:flex;align-items:center;gap:4px}
+.icp-tag.editable{cursor:pointer;transition:all .15s}
+.icp-tag.editable:hover{border-color:var(--accent);color:var(--accent)}
+.icp-tag select{background:transparent;border:none;color:inherit;font-size:10px;
+  font-family:inherit;outline:none;cursor:pointer;padding:0}
+.icp-tasks{padding-left:4px;display:flex;flex-direction:column;gap:3px}
+.icp-task{font-size:11px;color:var(--text2);display:flex;align-items:center;gap:5px}
+.icp-task::before{content:'·';color:var(--text3)}
+.icp-smart-badge{font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;
+  text-transform:uppercase;letter-spacing:.05em;margin-left:6px}
+.icp-smart-badge.ai{background:var(--accent-dim);color:var(--accent)}
+.icp-smart-badge.rule{background:var(--surface3);color:var(--text3)}
+.import-status{font-size:12px;color:var(--text2);padding:8px 0;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:8px}
+.import-spinner{width:14px;height:14px;border:2px solid var(--border2);
+  border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.import-actions{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.import-sel-all{font-size:11px;color:var(--text3);cursor:pointer;background:none;border:none;
+  font-family:inherit;padding:0;text-decoration:underline}
+.import-sel-all:hover{color:var(--accent)}
+.icp-notes{font-size:11px;color:var(--text3);font-style:italic;margin-top:4px}
+
+
+/* FONT SIZE SCALING */
+:root{--fs-card-title:13px;--fs-task:11px;--fs-triage-row:13px}
+.card-title{font-size:var(--fs-card-title)!important}
+.task-txt{font-size:var(--fs-task)!important}
+.triage-row-title{font-size:var(--fs-triage-row)!important}
+.triage-subtask-row .task-txt{font-size:var(--fs-task)!important}
+.lt-task-txt{font-size:var(--fs-task)!important}
+/* SETTINGS MODAL */
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.settings-row:last-child{border-bottom:none}
+.settings-label{font-size:13px;color:var(--text);font-weight:500}
+.settings-desc{font-size:11px;color:var(--text3);margin-top:2px}
+.settings-control{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.fs-slider{width:110px;accent-color:var(--accent);cursor:pointer}
+.fs-preview{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;min-width:32px;text-align:right}
+/* API KEY */
+.apikey-row{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.apikey-input{flex:1;background:var(--input);border:1px solid var(--border);border-radius:6px;padding:7px 10px;color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border-color .15s}
+.apikey-input:focus{border-color:var(--accent)}
+.apikey-status{font-size:11px;margin-top:4px}
+.apikey-status.ok{color:#3ddc84}
+.apikey-status.err{color:var(--red)}
+
 @media(max-width:900px){.board{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.board{grid-template-columns:1fr;padding:10px}.topbar,.toolbar,.bulk-bar{padding-left:12px;padding-right:12px}}
 </style>
@@ -328,6 +400,8 @@ body.light .hi-task{background:#edfaf3;color:#2d8c5a}
         <div class="manage-item" onclick="archiveDone();closeAllDD()">Archive done cards</div>
         <div class="manage-item" onclick="openArchive();closeAllDD()">View archive</div>
         <div class="manage-item" onclick="openWA();closeAllDD()">Export to WhatsApp</div>
+        <div class="manage-item" onclick="openImport();closeAllDD()">Import with AI</div>
+        <div class="manage-item" onclick="openSettings();closeAllDD()">Settings</div>
       </div>
     </div>
   </div>
@@ -455,6 +529,76 @@ body.light .hi-task{background:#edfaf3;color:#2d8c5a}
     <div class="form-group"><label class="form-label">Filter by section</label><select class="form-input" id="wa-filter" onchange="genWA()"><option value="all">All sections</option></select></div>
     <div class="form-group"><label class="form-label">Message</label><textarea class="wa-out" id="wa-out" readonly></textarea></div>
     <div class="modal-foot"><button class="btn-cancel" onclick="closeOv('ov-wa')">Close</button><button class="copy-btn" id="copy-btn" onclick="copyWA()">Copy</button></div>
+  </div>
+</div>
+
+
+<!-- SETTINGS MODAL -->
+<div class="overlay" id="ov-settings" onclick="if(event.target===this)closeOv('ov-settings')">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-title">Settings</div>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Card title size</div>
+        <div class="settings-desc">Title text on kanban cards</div>
+      </div>
+      <div class="settings-control">
+        <input type="range" class="fs-slider" id="sl-card-title" min="11" max="18" step="1" value="13" oninput="applyFontSize()"/>
+        <span class="fs-preview" id="pv-card-title">13px</span>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Task text size</div>
+        <div class="settings-desc">Subtask items on cards, triage & list</div>
+      </div>
+      <div class="settings-control">
+        <input type="range" class="fs-slider" id="sl-task" min="10" max="16" step="1" value="11" oninput="applyFontSize()"/>
+        <span class="fs-preview" id="pv-task">11px</span>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Triage row size</div>
+        <div class="settings-desc">Card titles in triage view</div>
+      </div>
+      <div class="settings-control">
+        <input type="range" class="fs-slider" id="sl-triage" min="11" max="18" step="1" value="13" oninput="applyFontSize()"/>
+        <span class="fs-preview" id="pv-triage">13px</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="resetFontSizes()" style="margin-right:auto">Reset defaults</button>
+      <button class="btn-save" onclick="closeOv('ov-settings')">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORT MODAL -->
+<div class="overlay" id="ov-import" onclick="if(event.target===this)closeOv('ov-import')">
+  <div class="modal" style="max-width:580px">
+    <div class="modal-title">Import with AI <span style="font-size:11px;font-weight:400;color:var(--text3);margin-left:6px">SMART methodology</span></div>
+    <div class="form-group">
+      <div class="apikey-row"><input class="apikey-input" id="api-key-input" type="password" placeholder="Anthropic API key (sk-ant-…)" oninput="saveApiKey()" autocomplete="off"/><button class="btn-save" onclick="testApiKey()" style="white-space:nowrap">Test key</button></div><div class="apikey-status" id="apikey-status"></div><label class="form-label" style="margin-top:8px">Paste your items</label>
+      <textarea class="import-area" id="import-input" placeholder="Paste anything — bullet points, meeting notes, a to-do list, WhatsApp messages...&#10;&#10;Example:&#10;• Follow up with Marcus Lincoln this week&#10;• Aki needs to review Enterprise Analytics scope&#10;• Fix Substack image creation issue — urgent, blocking Thursday deadline"></textarea>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <button class="btn-save" onclick="runImport()" id="import-run-btn">Analyse with AI</button>
+      <button class="btn-cancel" onclick="runImportFallback()" id="import-fallback-btn">Quick parse</button>
+      <div class="import-status" id="import-status" style="display:none"></div>
+    </div>
+    <div id="import-preview-wrap" style="display:none;margin-top:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <span style="font-size:12px;font-weight:500;color:var(--text)" id="import-preview-label">0 items found</span>
+        <button class="import-sel-all" onclick="importToggleAll()">Select all</button>
+      </div>
+      <div class="import-cards-preview" id="import-cards-preview"></div>
+      <div class="import-actions">
+        <button class="btn-save" onclick="commitImport()" id="import-commit-btn">Import selected</button>
+        <button class="btn-cancel" onclick="closeOv('ov-import')">Cancel</button>
+        <span style="font-size:11px;color:var(--text3);margin-left:auto" id="import-sel-count"></span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1351,6 +1495,501 @@ function openEdit(cid){
   document.getElementById('ov-card').classList.add('open');
 }
 
+
+
+/* ══════════════════════════════════════════════
+   SETTINGS — FONT SIZE SLIDERS
+   ══════════════════════════════════════════════ */
+var FS_KEY = 'snapdrum-fontsizes';
+
+function loadFontSizes() {
+  try {
+    var d = localStorage.getItem(FS_KEY);
+    if(d) return JSON.parse(d);
+  } catch(e){}
+  return {cardTitle:13, task:11, triage:13};
+}
+function saveFontSizes(fs) {
+  try { localStorage.setItem(FS_KEY, JSON.stringify(fs)); } catch(e){}
+}
+function applyFontSizesCSS(fs) {
+  document.documentElement.style.setProperty('--fs-card-title', fs.cardTitle+'px');
+  document.documentElement.style.setProperty('--fs-task', fs.task+'px');
+  document.documentElement.style.setProperty('--fs-triage-row', fs.triage+'px');
+}
+function applyFontSize() {
+  var ct = parseInt(document.getElementById('sl-card-title').value);
+  var tk = parseInt(document.getElementById('sl-task').value);
+  var tr = parseInt(document.getElementById('sl-triage').value);
+  document.getElementById('pv-card-title').textContent = ct+'px';
+  document.getElementById('pv-task').textContent = tk+'px';
+  document.getElementById('pv-triage').textContent = tr+'px';
+  var fs = {cardTitle:ct, task:tk, triage:tr};
+  applyFontSizesCSS(fs);
+  saveFontSizes(fs);
+}
+function resetFontSizes() {
+  var defaults = {cardTitle:13, task:11, triage:13};
+  document.getElementById('sl-card-title').value = defaults.cardTitle;
+  document.getElementById('sl-task').value = defaults.task;
+  document.getElementById('sl-triage').value = defaults.triage;
+  applyFontSize();
+}
+function openSettings() {
+  var fs = loadFontSizes();
+  document.getElementById('sl-card-title').value = fs.cardTitle;
+  document.getElementById('sl-task').value = fs.task;
+  document.getElementById('sl-triage').value = fs.triage;
+  document.getElementById('pv-card-title').textContent = fs.cardTitle+'px';
+  document.getElementById('pv-task').textContent = fs.task+'px';
+  document.getElementById('pv-triage').textContent = fs.triage+'px';
+  document.getElementById('ov-settings').classList.add('open');
+}
+
+/* ══════════════════════════════════════════════
+   API KEY — SAVE TO LOCALSTORAGE
+   ══════════════════════════════════════════════ */
+var APIKEY_KEY = 'snapdrum-apikey';
+
+function loadApiKey() {
+  try { return localStorage.getItem(APIKEY_KEY) || ''; } catch(e){ return ''; }
+}
+function saveApiKey() {
+  var val = document.getElementById('api-key-input').value.trim();
+  try { localStorage.setItem(APIKEY_KEY, val); } catch(e){}
+  var status = document.getElementById('apikey-status');
+  if(status) { status.textContent = val ? 'Key saved to browser' : ''; status.className='apikey-status ok'; }
+}
+function getApiKey() {
+  // prefer field value, fallback to stored
+  var field = document.getElementById('api-key-input');
+  if(field && field.value.trim()) return field.value.trim();
+  return loadApiKey();
+}
+function testApiKey() {
+  var key = getApiKey();
+  var status = document.getElementById('apikey-status');
+  if(!key) { status.textContent = 'Please enter an API key first'; status.className='apikey-status err'; return; }
+  status.textContent = 'Testing…'; status.className='apikey-status';
+  fetch('https://api.anthropic.com/v1/messages', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:10,messages:[{role:'user',content:'hi'}]})
+  })
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if(d.content && d.content[0]){
+      status.textContent = 'API key works!'; status.className='apikey-status ok';
+      localStorage.setItem(APIKEY_KEY, key);
+    } else {
+      status.textContent = 'Invalid response: '+(d.error?d.error.message:'unknown'); status.className='apikey-status err';
+    }
+  })
+  .catch(function(e){ status.textContent = 'Connection failed: '+e.message; status.className='apikey-status err'; });
+}
+
+/* ══════════════════════════════════════════════════════
+   IMPORT WITH AI — SMART METHODOLOGY
+   ══════════════════════════════════════════════════════ */
+
+var importParsed = [];   // array of preview card objects
+var importAllSel = true;
+
+function openImport() {
+  document.getElementById('import-input').value = '';
+  document.getElementById('import-preview-wrap').style.display = 'none';
+  document.getElementById('import-status').style.display = 'none';
+  // load saved API key
+  var saved = loadApiKey();
+  var keyField = document.getElementById('api-key-input');
+  if(keyField && saved) {
+    keyField.value = saved;
+    var st=document.getElementById('apikey-status');
+    if(st){ st.textContent='Key loaded from browser'; st.className='apikey-status ok'; }
+  }
+  document.getElementById('ov-import').classList.add('open');
+}
+
+/* ── RULE-BASED FALLBACK ── */
+function runImportFallback() {
+  var raw = document.getElementById('import-input').value.trim();
+  if(!raw) return;
+  var lines = raw.split('\n').map(function(l){ return l.replace(/^[\-\*\•\d\.]+\s*/,'').trim(); }).filter(Boolean);
+  var results = lines.map(function(line){ return smartRules(line, null); });
+  showImportPreview(results, false);
+}
+
+function smartRules(text, existingCard) {
+  var po = getPrioOrder();
+  // Priority by keywords
+  var priority = 'thisweek';
+  if(/\b(urgent|critical|asap|immediately|today|EOD|blocking)\b/i.test(text)) priority = 'urgent';
+  else if(/\b(planning|eventually|someday|low priority|backlog)\b/i.test(text)) priority = 'planning';
+
+  // Deadline by keywords
+  var deadline = '';
+  var today = new Date();
+  var dlMatch = text.match(/\b(\d{4}-\d{2}-\d{2})\b/);
+  if(dlMatch) deadline = dlMatch[1];
+  else if(/\btoday\b/i.test(text)) deadline = today.toISOString().slice(0,10);
+  else if(/\bthis week\b/i.test(text)) { var d=new Date(today); d.setDate(d.getDate()+(5-d.getDay())); deadline=d.toISOString().slice(0,10); }
+  else if(/\bthursday\b/i.test(text)) { var d=new Date(today); d.setDate(d.getDate()+((4-d.getDay()+7)%7||7)); deadline=d.toISOString().slice(0,10); }
+  else if(/\bfriday\b/i.test(text)) { var d=new Date(today); d.setDate(d.getDate()+((5-d.getDay()+7)%7||7)); deadline=d.toISOString().slice(0,10); }
+  else if(/\bnext week\b/i.test(text)) { var d=new Date(today); d.setDate(d.getDate()+7); deadline=d.toISOString().slice(0,10); }
+
+  // Section by keywords
+  var section = SECTIONS[0] || 'Projects';
+  var sectionRules = [
+    [/\b(course|learn|teach|bootcamp|maven|substack|webinar|certif)\b/i, 'Courses'],
+    [/\b(linkedin|twitter|instagram|social|post|content|email signature)\b/i, 'Socials'],
+    [/\b(website|clay|lead gen|AIESEC|outreach|special|delivery process)\b/i, 'Special'],
+    [/\b(email|newsletter|drip|inbox|reply)\b/i, 'Emails'],
+  ];
+  for(var i=0;i<sectionRules.length;i++){
+    if(sectionRules[i][0].test(text)){
+      var candidate=sectionRules[i][1];
+      if(SECTIONS.indexOf(candidate)>-1){section=candidate;break;}
+    }
+  }
+
+  // Assignee by name mention
+  var assignees = [];
+  PEOPLE.forEach(function(p){
+    var firstName = p.name.split(' ')[0];
+    if(new RegExp('\\b'+firstName+'\\b','i').test(text) || new RegExp('\\b'+p.name+'\\b','i').test(text)){
+      assignees.push(p.id);
+    }
+  });
+
+  // Clean title — strip assignee names & deadline words for cleaner title
+  var title = text
+    .replace(/\b(urgent|asap|immediately|EOD|this week|next week|today|thursday|friday|blocking)\b/gi,'')
+    .replace(/\s{2,}/g,' ').trim();
+  if(title.length > 80) title = title.slice(0,80).trim() + '…';
+
+  // Check if matches existing card (by similarity)
+  var existingMatch = null;
+  var titleLower = title.toLowerCase();
+  CARDS.forEach(function(c){
+    if(c.title.toLowerCase().indexOf(titleLower.slice(0,20))>-1 || titleLower.indexOf(c.title.toLowerCase().slice(0,20))>-1){
+      existingMatch = c;
+    }
+  });
+
+  return {
+    title: existingCard ? existingCard.title : title,
+    rawText: text,
+    priority: priority,
+    deadline: deadline,
+    section: section,
+    assignees: assignees,
+    tasks: [],
+    notes: '',
+    selected: true,
+    aiPowered: false,
+    existingCard: existingMatch,
+    updateExisting: !!existingMatch
+  };
+}
+
+/* ── AI-POWERED IMPORT ── */
+function runImport() {
+  var raw = document.getElementById('import-input').value.trim();
+  if(!raw) return;
+  var btn = document.getElementById('import-run-btn');
+  var status = document.getElementById('import-status');
+  btn.disabled = true; btn.textContent = 'Analysing…';
+  status.style.display = 'flex';
+  status.innerHTML = '<div class="import-spinner"></div><span>Claude is reading your items…</span>';
+
+  var peopleNames = PEOPLE.map(function(p){ return p.name; }).join(', ');
+  var sections = SECTIONS.join(', ');
+  var priorities = PRIORITIES.map(function(p){ return p.label; }).join(', ');
+  var existingTitles = CARDS.map(function(c){ return c.title; }).join('\n');
+  var today = new Date().toISOString().slice(0,10);
+
+  var systemPrompt = (
+    'You are a productivity assistant applying the SMART methodology (Specific, Measurable, Achievable, Relevant, Time-bound) to structure tasks.\n' +
+    'Today is '+today+'.\n' +
+    'Available sections: '+sections+'\n' +
+    'Available priorities: '+priorities+'\n' +
+    'Known team members: '+peopleNames+'\n' +
+    'Existing cards (for duplicate detection):\n'+existingTitles+'\n\n' +
+    'Return ONLY valid JSON — an array of card objects. No markdown, no explanation.\n' +
+    'Each object must have: title (string, specific & clear), section (from available sections), ' +
+    'priority (one of: '+priorities+'), deadline (YYYY-MM-DD or empty string), ' +
+    'assignees (array of names from known team members, or empty), ' +
+    'tasks (array of strings — concrete subtasks applying SMART), ' +
+    'notes (string — any extra context), ' +
+    'existingTitle (string — title of an existing card this updates, or empty string).'
+  );
+
+  var userMsg = 'Structure these items into SMART cards:\n\n' + raw;
+
+  var apiKey = getApiKey();
+  if(!apiKey){
+    btn.disabled=false; btn.textContent='Analyse with AI';
+    status.style.display='flex';
+    status.innerHTML='<span style="color:var(--red)">Please enter your Anthropic API key above</span>';
+    return;
+  }
+  fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 2000,
+      system: systemPrompt,
+      messages: [{role:'user', content: userMsg}]
+    })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    btn.disabled = false; btn.textContent = 'Analyse with AI';
+    status.style.display = 'none';
+    var text = data.content && data.content[0] && data.content[0].text ? data.content[0].text : '';
+    // strip markdown fences
+    text = text.replace(/```json|```/g,'').trim();
+    try {
+      var items = JSON.parse(text);
+      var results = items.map(function(item){
+        // resolve assignee names to IDs
+        var assigneeIds = [];
+        if(item.assignees && item.assignees.length) {
+          item.assignees.forEach(function(name){
+            var p = PEOPLE.find(function(pe){ return pe.name.toLowerCase().indexOf(name.toLowerCase())>-1 || name.toLowerCase().indexOf(pe.name.split(' ')[0].toLowerCase())>-1; });
+            if(p) assigneeIds.push(p.id);
+          });
+        }
+        // find existing card match
+        var existingCard = null;
+        if(item.existingTitle) {
+          existingCard = CARDS.find(function(c){ return c.title.toLowerCase()===item.existingTitle.toLowerCase(); });
+        }
+        // validate section
+        var section = SECTIONS.indexOf(item.section)>-1 ? item.section : SECTIONS[0];
+        // validate priority — match by label
+        var priority = PRIORITIES[0] ? PRIORITIES[0].id : 'urgent';
+        PRIORITIES.forEach(function(p){ if(p.label.toLowerCase()===String(item.priority).toLowerCase()) priority=p.id; });
+        return {
+          title: item.title || 'Untitled',
+          rawText: item.title,
+          priority: priority,
+          deadline: item.deadline || '',
+          section: section,
+          assignees: assigneeIds,
+          tasks: Array.isArray(item.tasks) ? item.tasks : [],
+          notes: item.notes || '',
+          selected: true,
+          aiPowered: true,
+          existingCard: existingCard,
+          updateExisting: !!existingCard
+        };
+      });
+      showImportPreview(results, true);
+    } catch(e) {
+      // AI failed — fall back to rules
+      status.style.display = 'flex';
+      status.innerHTML = '<span style="color:var(--amber)">AI parse failed — using quick parse instead</span>';
+      setTimeout(function(){ status.style.display='none'; runImportFallback(); }, 1500);
+    }
+  })
+  .catch(function(){
+    btn.disabled = false; btn.textContent = 'Analyse with AI';
+    status.style.display = 'flex';
+    status.innerHTML = '<span style="color:var(--amber)">No API connection — using quick parse</span>';
+    setTimeout(function(){ status.style.display='none'; runImportFallback(); }, 1500);
+  });
+}
+
+/* ── PREVIEW RENDERING ── */
+function showImportPreview(results, aiPowered) {
+  importParsed = results;
+  var wrap = document.getElementById('import-preview-wrap');
+  var container = document.getElementById('import-cards-preview');
+  var label = document.getElementById('import-preview-label');
+  container.innerHTML = '';
+  label.textContent = results.length + ' item' + (results.length===1?'':'s') + ' found' + (aiPowered?' (AI)':' (quick parse)');
+  wrap.style.display = '';
+  results.forEach(function(item, idx){ container.appendChild(buildImportPreview(item, idx)); });
+  updateImportSelCount();
+}
+
+function buildImportPreview(item, idx) {
+  var el = document.createElement('div');
+  el.className = 'import-card-preview' + (item.selected?' selected':'') + (item.existingCard?' existing':'');
+  el.id = 'icp-'+idx;
+
+  // checkbox
+  var chk = document.createElement('div'); chk.className='icp-header';
+  var cb = document.createElement('div'); cb.className='icp-check'+(item.selected?' on':'');
+  cb.onclick = function(){ item.selected=!item.selected; cb.classList.toggle('on',item.selected); el.classList.toggle('selected',item.selected); updateImportSelCount(); };
+
+  var titleWrap = document.createElement('div'); titleWrap.className='icp-title-wrap';
+
+  if(item.existingCard) {
+    var existLbl = document.createElement('div'); existLbl.className='icp-existing-label';
+    existLbl.textContent = '↻ Updates: ' + item.existingCard.title;
+    titleWrap.appendChild(existLbl);
+  }
+
+  var titleEl = document.createElement('div'); titleEl.className='icp-title';
+  titleEl.contentEditable = 'true'; titleEl.textContent = item.title;
+  titleEl.oninput = function(){ item.title = titleEl.textContent.trim(); };
+  titleWrap.appendChild(titleEl);
+
+  chk.appendChild(cb); chk.appendChild(titleWrap);
+  el.appendChild(chk);
+
+  // smart badge
+  var badge = document.createElement('span'); badge.className='icp-smart-badge '+(item.aiPowered?'ai':'rule');
+  badge.textContent = item.aiPowered ? 'AI' : 'Rules';
+  titleWrap.appendChild(badge);
+
+  // meta tags — editable dropdowns
+  var meta = document.createElement('div'); meta.className='icp-meta';
+
+  // section
+  var secTag = makeImportTag('📁', item.section, SECTIONS, function(v){ item.section=v; });
+  meta.appendChild(secTag);
+
+  // priority
+  var prioLabels = PRIORITIES.map(function(p){ return p.label; });
+  var prioIds = PRIORITIES.map(function(p){ return p.id; });
+  var curPrioLabel = (PRIORITIES.find(function(p){ return p.id===item.priority; })||PRIORITIES[0]||{label:'Urgent'}).label;
+  var prioTag = makeImportTag('⚑', curPrioLabel, prioLabels, function(v){
+    var p = PRIORITIES.find(function(pr){ return pr.label===v; });
+    if(p) item.priority = p.id;
+  });
+  meta.appendChild(prioTag);
+
+  // deadline
+  if(item.deadline) {
+    var dlSpan = document.createElement('div'); dlSpan.className='icp-tag';
+    dlSpan.textContent = '📅 ' + dlDisplay(item.deadline);
+    meta.appendChild(dlSpan);
+  }
+
+  // assignees
+  item.assignees.forEach(function(pid){
+    var p=gp(pid); if(!p) return;
+    var aTag=document.createElement('div'); aTag.className='icp-tag';
+    aTag.innerHTML='<span style="width:8px;height:8px;border-radius:50%;background:'+p.color+';display:inline-block"></span> '+esc(p.name);
+    meta.appendChild(aTag);
+  });
+
+  el.appendChild(meta);
+
+  // tasks
+  if(item.tasks && item.tasks.length) {
+    var taskDiv = document.createElement('div'); taskDiv.className='icp-tasks';
+    item.tasks.forEach(function(t){
+      var tEl=document.createElement('div'); tEl.className='icp-task'; tEl.textContent=t; taskDiv.appendChild(tEl);
+    });
+    el.appendChild(taskDiv);
+  }
+
+  // notes
+  if(item.notes) {
+    var notesEl = document.createElement('div'); notesEl.className='icp-notes'; notesEl.textContent=item.notes;
+    el.appendChild(notesEl);
+  }
+
+  return el;
+}
+
+function makeImportTag(icon, currentVal, options, onChange) {
+  var wrap = document.createElement('div'); wrap.className='icp-tag editable';
+  var sel = document.createElement('select'); sel.className='icp-tag';
+  sel.style.cssText='background:transparent;border:none;color:var(--text2);font-size:10px;font-family:inherit;outline:none;cursor:pointer;padding:0;max-width:110px';
+  options.forEach(function(opt){
+    var o=document.createElement('option'); o.value=opt; o.textContent=opt;
+    if(opt===currentVal) o.selected=true;
+    sel.appendChild(o);
+  });
+  sel.onchange=function(){ onChange(sel.value); };
+  wrap.textContent=icon+' ';
+  wrap.appendChild(sel);
+  return wrap;
+}
+
+function importToggleAll() {
+  importAllSel = !importAllSel;
+  importParsed.forEach(function(item, idx){
+    item.selected = importAllSel;
+    var cb=document.querySelector('#icp-'+idx+' .icp-check');
+    var el=document.getElementById('icp-'+idx);
+    if(cb) cb.classList.toggle('on', importAllSel);
+    if(el) el.classList.toggle('selected', importAllSel);
+  });
+  updateImportSelCount();
+}
+
+function updateImportSelCount() {
+  var n = importParsed.filter(function(i){ return i.selected; }).length;
+  var el = document.getElementById('import-sel-count');
+  if(el) el.textContent = n + ' of ' + importParsed.length + ' selected';
+  var btn = document.getElementById('import-commit-btn');
+  if(btn) btn.textContent = 'Import ' + n + ' card' + (n===1?'':'s');
+}
+
+/* ── COMMIT IMPORT ── */
+function commitImport() {
+  var toImport = importParsed.filter(function(i){ return i.selected; });
+  if(!toImport.length) return;
+  var added=0, updated=0;
+  toImport.forEach(function(item){
+    if(item.updateExisting && item.existingCard) {
+      // update existing card
+      var card = CARDS.find(function(c){ return c.id===item.existingCard.id; });
+      if(card) {
+        var oldStatus=card.status, oldPriority=card.priority;
+        card.title = item.title;
+        card.priority = item.priority;
+        card.section = item.section;
+        card.deadline = item.deadline;
+        card.assignees = item.assignees.slice();
+        if(item.tasks.length) {
+          var existingDone = {};
+          card.tasks.forEach(function(t){ existingDone[t.t]=t.done; });
+          card.tasks = item.tasks.map(function(t){ return {t:t, done:existingDone[t]||false}; });
+        }
+        if(item.notes) card.notes = item.notes;
+        card.updatedAt = Date.now();
+        if(oldPriority!==card.priority) addHistory(card,'priority','Priority updated via import: '+bl(oldPriority)+' → '+bl(card.priority));
+        addHistory(card,'status','Updated via SMART import');
+        updated++;
+      }
+    } else {
+      // create new card
+      var nid = CARDS.length ? Math.max.apply(null, CARDS.map(function(c){ return c.id; }))+1 : 1;
+      var newCard = {
+        id: nid,
+        title: item.title,
+        section: item.section,
+        priority: item.priority,
+        status: 'todo',
+        deadline: item.deadline,
+        assignees: item.assignees.slice(),
+        tasks: item.tasks.map(function(t){ return {t:t, done:false}; }),
+        notes: item.notes,
+        recurring: false,
+        history: [{type:'status', text:'Created via SMART import', ts:Date.now()}],
+        updatedAt: Date.now()
+      };
+      CARDS.push(newCard);
+      added++;
+    }
+  });
+  persist(); render();
+  closeOv('ov-import');
+  var msg = [];
+  if(added) msg.push(added+' card'+(added===1?'':'s')+' added');
+  if(updated) msg.push(updated+' card'+(updated===1?'':'s')+' updated');
+  alert(msg.join(', ')+'.');
+}
+/* ══════════════════════════════════════════════════════ */
+
 /* ── HISTORY ── */
 function addHistory(card, type, text) {
   if(!card.history) card.history=[];
@@ -1607,6 +2246,7 @@ function init(){
   wireDragDrop();
   renderSecChips();
   applyView();
+  applyFontSizesCSS(loadFontSizes());
   render();
 }
 if(document.readyState==='loading'){
